@@ -340,7 +340,7 @@ export const links = {
   demo: 'https://applications-tracker.imigueldev.duckdns.org/' as string,
   // Cuenta pública de demostración (datos ficticios, restablecida a diario). La contraseña vacía oculta el bloque.
   demoUser: 'demo@example.com',
-  demoPass: '' as string,
+  demoPass: 'DemoPass' as string,
 }
 
 export const emailParts = ['imiguel10', 'hotmail.es'] as const
