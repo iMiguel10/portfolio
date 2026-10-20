@@ -87,7 +87,7 @@ export const content: Record<Lang, Content> = {
       title: 'Sobre mí',
       paragraphs: [
         'Me gusta trabajar el ciclo completo de un producto: entender el problema, diseñar la solución, desarrollarla, integrar servicios, desplegarla y mantenerla en producción.',
-        'Vengo del mundo de Flutter y Odoo, con sistemas de turnos, seguimiento en tiempo real y herramientas para obras. Ahora profundizo en desarrollo web moderno, arquitectura de APIs y escalabilidad, y uso la IA como apoyo en programación, tests, documentación y refactorización.',
+        'Vengo del mundo de Flutter y Odoo, con sistemas de turnos, seguimiento en tiempo real y herramientas para obras. Ahora profundizo en desarrollo web moderno, arquitectura de APIs y escalabilidad, y uso la IA como apoyo en programación, tests, documentación y refactorización. Acabo de matricularme en el Máster en Desarrollo con IA de BIG school para formalizarlo.',
         'Fuera del trabajo administro mis propios servidores con Linux y Docker, y construyo proyectos personales para seguir aprendiendo.',
       ],
       facts: [
@@ -177,6 +177,7 @@ export const content: Record<Lang, Content> = {
       ],
       educationTitle: 'Formación',
       education: [
+        { title: 'Máster en Desarrollo con IA', place: 'BIG school · Doble titulación: Experto Universitario (16 ECTS), Universidad Isabel I', period: 'En curso' },
         { title: 'Máster en Ingeniería Informática', place: 'Universidad de Granada', period: '2019 – 2020' },
         { title: 'Grado en Ingeniería Informática (Tecnologías de la Información)', place: 'Universidad de Granada', period: '2015 – 2019' },
       ],
@@ -219,7 +220,7 @@ export const content: Record<Lang, Content> = {
       title: 'About me',
       paragraphs: [
         'I like working the whole life cycle of a product: understanding the problem, designing the solution, building it, integrating services, deploying it and keeping it running in production.',
-        "I come from Flutter and Odoo, with queue management systems, real-time tracking and construction tools. Now I'm going deeper into modern web development, API architecture and scalability, and I use AI as support for coding, tests, documentation and refactoring.",
+        "I come from Flutter and Odoo, with queue management systems, real-time tracking and construction tools. Now I'm going deeper into modern web development, API architecture and scalability, and I use AI as support for coding, tests, documentation and refactoring. I have just enrolled in BIG school's Master in AI-Powered Development to take it further.",
         'Outside of work I run my own servers with Linux and Docker, and build personal projects to keep learning.',
       ],
       facts: [
@@ -309,6 +310,7 @@ export const content: Record<Lang, Content> = {
       ],
       educationTitle: 'Education',
       education: [
+        { title: 'Master in AI-Powered Development', place: 'BIG school · Double degree: University Expert (16 ECTS), Universidad Isabel I', period: 'In progress' },
         { title: "Master's in Computer Engineering", place: 'University of Granada', period: '2019 – 2020' },
         { title: "Bachelor's in Computer Engineering (Information Technology)", place: 'University of Granada', period: '2015 – 2019' },
       ],
