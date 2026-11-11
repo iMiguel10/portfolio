@@ -30,7 +30,7 @@
 
 ## Qué es
 
-Una web de una sola página, bilingüe (español e inglés), con mi perfil profesional, mi experiencia, mi stack y el caso de estudio de [Applications Tracker](https://github.com/iMiguel10/applications-tracker), un proyecto full stack completo con FastAPI, React y PostgreSQL.
+Una web de una sola página, bilingüe (español e inglés), con mi perfil profesional, mi experiencia, mi stack y los casos de estudio de [Applications Tracker](https://github.com/iMiguel10/applications-tracker) y [AXTTON CORE](https://github.com/iMiguel10/axtton-core), dos proyectos full stack con FastAPI, React y PostgreSQL, con galería de capturas, vídeo de presentación y demo pública.
 
 Está pensada para ser ligera: sin framework de UI ni librería de estilos, solo React, CSS propio y fuentes autoalojadas. El resultado es un sitio estático que pesa poco y se sirve con nginx.
 
@@ -91,9 +91,10 @@ La web queda en <http://localhost:8080>.
 | Quiero cambiar | Dónde |
 |---|---|
 | Textos en español e inglés, experiencia, stack, proyectos | `src/content.ts` |
-| Enlaces (GitHub, LinkedIn, repo, demo) y email | `links` y `emailParts` en `src/content.ts` |
-| Cuenta de demo del Tracker | `demoUser` y `demoPass` en `src/content.ts` (con la contraseña vacía el bloque se oculta) |
-| Capturas del proyecto | Imágenes en `public/tracker/` y su lista, con pies de foto, en `projects.tracker.shots` |
+| Enlaces de GitHub y LinkedIn, y email | `links` y `emailParts` en `src/content.ts` |
+| Repositorio, demo y cuenta de demo de cada proyecto | `projectLinks` en `src/content.ts` (con la contraseña vacía el bloque de la cuenta se oculta) |
+| Añadir un proyecto | Un objeto más en `projects.items` (en cada idioma) y su entrada en `projectLinks` |
+| Capturas y vídeo de un proyecto | Imágenes en `public/<proyecto>/` y su lista, con pies de foto, en `shots`; el vídeo opcional en `video` |
 | Foto y banner | `public/hero.webp`, `public/avatar.webp`, `public/favicon.png` |
 | Imagen al compartir el enlace | `public/og.png` (1200 × 630) |
 | Colores y tipografía | Variables al inicio de `src/index.css` |
@@ -105,11 +106,12 @@ Para añadir un idioma: ampliar el tipo `Lang` y añadir su bloque en `content`;
 ```text
 .
 ├── public/             Imágenes, favicon, robots.txt y sitemap.xml
-│   └── tracker/        Capturas del proyecto en WebP
+│   ├── tracker/        Capturas en WebP, vídeo de presentación (MP4 a 720p) y su portada
+│   └── axtton/         Capturas del proyecto en WebP
 ├── src/
 │   ├── App.tsx         Secciones de la página
 │   ├── Gallery.tsx     Galería y visor ampliado
-│   ├── content.ts      Textos ES/EN, enlaces y datos del proyecto
+│   ├── content.ts      Textos ES/EN, enlaces y datos de los proyectos
 │   ├── index.css       Estilos y variables de diseño
 │   └── main.tsx        Punto de entrada
 ├── Dockerfile          Build multietapa: Node para compilar, nginx para servir

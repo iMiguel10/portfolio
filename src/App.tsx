@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { content, emailParts, links, type Lang } from './content'
+import { content, emailParts, links, projectLinks, type Lang, type Project } from './content'
 import Gallery from './Gallery'
 
 function initialLang(): Lang {
@@ -42,6 +42,66 @@ function RotatingBadge({ text }: { text: string }) {
   )
 }
 
+function ProjectCard({ project }: { project: Project }) {
+  const l = projectLinks[project.id]
+  return (
+    <article className="project" aria-labelledby={`project-${project.id}`}>
+      <div className="project-info">
+        <p className="pill">{project.status}</p>
+        <h3 id={`project-${project.id}`}>{project.name}</h3>
+        <p className="tagline">{project.tagline}</p>
+        <p>{project.description}</p>
+        <ul className="checks">
+          {project.highlights.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </ul>
+        <ul className="tags" aria-label="Stack">
+          {project.stack.map((s) => (
+            <li key={s}>{s}</li>
+          ))}
+        </ul>
+        <div className="actions">
+          <a className="btn btn-accent" href={l.repo} target="_blank" rel="noreferrer">
+            {project.repo}
+            <ArrowIcon />
+          </a>
+          {l.demo ? (
+            <a className="btn btn-ghost" href={l.demo} target="_blank" rel="noreferrer">
+              {project.demo}
+            </a>
+          ) : (
+            <span className="btn btn-ghost btn-off" aria-disabled="true">
+              {project.demoSoon}
+            </span>
+          )}
+        </div>
+        {l.demo && l.demoPass && project.credentials && (
+          <dl className="creds">
+            <dt>{project.credentials.title}</dt>
+            <dd>
+              <span>{project.credentials.user}</span> <code>{l.demoUser}</code>
+            </dd>
+            <dd>
+              <span>{project.credentials.pass}</span> <code>{l.demoPass}</code>
+            </dd>
+            <dd className="creds-note">{project.credentials.note}</dd>
+          </dl>
+        )}
+      </div>
+      <Gallery shots={project.shots} labels={project.gallery} />
+      {project.video && (
+        <figure className="project-video">
+          <video controls preload="none" playsInline poster={project.video.poster}>
+            <source src={project.video.src} type="video/mp4" />
+          </video>
+          <figcaption>{project.video.label}</figcaption>
+        </figure>
+      )}
+    </article>
+  )
+}
+
 export default function App() {
   const [lang, setLang] = useState<Lang>(initialLang)
   const t = content[lang]
@@ -71,7 +131,6 @@ export default function App() {
     return () => observer.disconnect()
   }, [])
 
-  const tracker = t.projects.tracker
   const marquee = ['Python', 'FastAPI', 'React', 'TypeScript', 'PostgreSQL', 'Docker', 'Linux', 'Flutter', 'Odoo', 'CI/CD']
 
   return (
@@ -180,52 +239,11 @@ export default function App() {
               <p>{t.projects.intro}</p>
             </div>
 
-            <article className="project">
-              <div className="project-info">
-                <p className="pill">{tracker.status}</p>
-                <h3>{tracker.name}</h3>
-                <p className="tagline">{tracker.tagline}</p>
-                <p>{tracker.description}</p>
-                <ul className="checks">
-                  {tracker.highlights.map((h) => (
-                    <li key={h}>{h}</li>
-                  ))}
-                </ul>
-                <ul className="tags" aria-label="Stack">
-                  {tracker.stack.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-                <div className="actions">
-                  <a className="btn btn-accent" href={links.repo} target="_blank" rel="noreferrer">
-                    {tracker.repo}
-                    <ArrowIcon />
-                  </a>
-                  {links.demo ? (
-                    <a className="btn btn-ghost" href={links.demo} target="_blank" rel="noreferrer">
-                      {tracker.demo}
-                    </a>
-                  ) : (
-                    <span className="btn btn-ghost btn-off" aria-disabled="true">
-                      {tracker.demoSoon}
-                    </span>
-                  )}
-                </div>
-                {links.demo && links.demoPass && (
-                  <dl className="creds">
-                    <dt>{tracker.credentials.title}</dt>
-                    <dd>
-                      <span>{tracker.credentials.user}</span> <code>{links.demoUser}</code>
-                    </dd>
-                    <dd>
-                      <span>{tracker.credentials.pass}</span> <code>{links.demoPass}</code>
-                    </dd>
-                    <dd className="creds-note">{tracker.credentials.note}</dd>
-                  </dl>
-                )}
-              </div>
-              <Gallery shots={tracker.shots} labels={tracker.gallery} />
-            </article>
+            <div className="projects-list">
+              {t.projects.items.map((p) => (
+                <ProjectCard key={p.id} project={p} />
+              ))}
+            </div>
 
             <aside className="more">
               <h3>{t.projects.more.title}</h3>

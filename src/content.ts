@@ -7,6 +7,23 @@ export interface Shot {
 
 export type Lang = 'es' | 'en'
 
+export interface Project {
+  id: string
+  name: string
+  tagline: string
+  status: string
+  description: string
+  highlights: string[]
+  stack: string[]
+  repo: string
+  demo: string
+  demoSoon: string
+  credentials?: { title: string; user: string; pass: string; note: string }
+  video?: { src: string; poster: string; label: string }
+  gallery: { label: string; close: string; prev: string; next: string }
+  shots: Shot[]
+}
+
 export interface Content {
   nav: { about: string; projects: string; stack: string; experience: string; contact: string; cta: string }
   hero: {
@@ -26,20 +43,7 @@ export interface Content {
   projects: {
     title: string
     intro: string
-    tracker: {
-      name: string
-      tagline: string
-      status: string
-      description: string
-      highlights: string[]
-      stack: string[]
-      repo: string
-      demo: string
-      demoSoon: string
-      credentials: { title: string; user: string; pass: string; note: string }
-      gallery: { label: string; close: string; prev: string; next: string }
-      shots: Shot[]
-    }
+    items: Project[]
     more: { title: string; text: string }
   }
   stack: { title: string; intro: string; groups: { name: string; items: string[] }[]; learning: string }
@@ -100,35 +104,73 @@ export const content: Record<Lang, Content> = {
     projects: {
       title: 'Proyectos',
       intro: 'Mi trabajo para empresas y mis servidores personales no son públicos. Aquí está lo que sí puedo enseñar, y habrá más.',
-      tracker: {
-        name: 'Applications Tracker',
-        tagline: 'Todas tus candidaturas, su historia y tu próximo paso, en un solo sitio.',
-        status: 'MVP completo, en uso real',
-        description:
-          'Una aplicación para llevar la búsqueda de empleo: registra cada solicitud, cómo avanza y qué toca hacer después. La diseñé, la construí y la despliego yo, con documentación, tests y CI.',
-        highlights: [
-          'Máquina de estados con historial que no se puede reescribir y deshacer del último cambio.',
-          'Aislamiento entre usuarios en dos capas: filtro en cada consulta y claves foráneas compuestas en la base de datos.',
-          'IA que adapta el CV y la carta a cada oferta sin inventar experiencia, con modelo local gratuito o clave propia.',
-          'Kanban, calendario con exportación a Google Calendar, avisos por email y métricas que muestran sobre cuántos datos se calculan.',
-          'Interfaz en español e inglés, accesible y adaptada a móvil.',
-        ],
-        stack: ['FastAPI', 'React 19', 'TypeScript', 'PostgreSQL', 'SuperTokens', 'Docker', 'GitHub Actions'],
-        repo: 'Ver código',
-        demo: 'Probar demo',
-        demoSoon: 'Demo próximamente',
-        credentials: { title: 'Cuenta de demostración', user: 'Usuario', pass: 'Contraseña', note: 'Los datos son ficticios y se restablecen cada día.' },
-        gallery: { label: 'Capturas del proyecto', close: 'Cerrar', prev: 'Anterior', next: 'Siguiente' },
-        shots: [
-          { src: '/tracker/dashboard.webp', caption: 'Dashboard con estados, envíos por semana y tasa de respuesta', w: 1600, h: 1000 },
-          { src: '/tracker/tablero.webp', caption: 'Tablero Kanban con arrastrar y soltar', w: 1600, h: 1000 },
-          { src: '/tracker/detalle.webp', caption: 'Detalle de una solicitud: historial, entrevistas y recordatorios', w: 1600, h: 1000 },
-          { src: '/tracker/cv-ia.webp', caption: 'CV adaptado con IA, con el encaje frente a la oferta', w: 1600, h: 1000 },
-          { src: '/tracker/calendario.webp', caption: 'Calendario de entrevistas y recordatorios', w: 1600, h: 1000 },
-          { src: '/tracker/dashboard-oscuro.webp', caption: 'Dashboard en modo oscuro', w: 1600, h: 1000 },
-          { src: '/tracker/movil.webp', caption: 'Versión móvil del dashboard', w: 780, h: 1688 },
-        ],
-      },
+      items: [
+        {
+          id: 'tracker',
+          name: 'Applications Tracker',
+          tagline: 'Todas tus candidaturas, su historia y tu próximo paso, en un solo sitio.',
+          status: 'MVP completo, en uso real',
+          description:
+            'Una aplicación para llevar la búsqueda de empleo: registra cada solicitud, cómo avanza y qué toca hacer después. La diseñé, la construí y la despliego yo, con documentación, tests y CI.',
+          highlights: [
+            'Máquina de estados con historial que no se puede reescribir y deshacer del último cambio.',
+            'Aislamiento entre usuarios en dos capas: filtro en cada consulta y claves foráneas compuestas en la base de datos.',
+            'IA que adapta el CV y la carta a cada oferta sin inventar experiencia, con modelo local gratuito o clave propia.',
+            'Kanban, calendario con exportación a Google Calendar, avisos por email y métricas que muestran sobre cuántos datos se calculan.',
+            'Interfaz en español e inglés, accesible y adaptada a móvil.',
+          ],
+          stack: ['FastAPI', 'React 19', 'TypeScript', 'PostgreSQL', 'SuperTokens', 'Docker', 'GitHub Actions'],
+          repo: 'Ver código',
+          demo: 'Probar demo',
+          demoSoon: 'Demo próximamente',
+          credentials: { title: 'Cuenta de demostración', user: 'Usuario', pass: 'Contraseña', note: 'Los datos son ficticios y se restablecen cada día.' },
+          video: { src: '/tracker/promo.mp4', poster: '/tracker/promo-poster.jpg', label: 'Vídeo de presentación (1 minuto)' },
+          gallery: { label: 'Capturas del proyecto', close: 'Cerrar', prev: 'Anterior', next: 'Siguiente' },
+          shots: [
+            { src: '/tracker/dashboard.webp', caption: 'Dashboard con estados, envíos por semana y tasa de respuesta', w: 1600, h: 1000 },
+            { src: '/tracker/tablero.webp', caption: 'Tablero Kanban con arrastrar y soltar', w: 1600, h: 1000 },
+            { src: '/tracker/detalle.webp', caption: 'Detalle de una solicitud: historial, entrevistas y recordatorios', w: 1600, h: 1000 },
+            { src: '/tracker/cv-ia.webp', caption: 'CV adaptado con IA, con el encaje frente a la oferta', w: 1600, h: 1000 },
+            { src: '/tracker/calendario.webp', caption: 'Calendario de entrevistas y recordatorios', w: 1600, h: 1000 },
+            { src: '/tracker/dashboard-oscuro.webp', caption: 'Dashboard en modo oscuro', w: 1600, h: 1000 },
+            { src: '/tracker/movil.webp', caption: 'Versión móvil del dashboard', w: 780, h: 1688 },
+          ],
+        },
+        {
+          id: 'axtton',
+          name: 'AXTTON CORE',
+          tagline: 'Gestión para talleres mecánicos, con un portal para que el cliente siga su reparación sin llamar.',
+          status: 'En desarrollo, cuarta fase desplegada',
+          description:
+            'Una aplicación multi-taller que cubre el flujo completo: cita, recepción, diagnóstico, presupuesto, aprobación del cliente desde el móvil, reparación y entrega. La construyo por fases, con especificación de producto, arquitectura razonada, tests y despliegue desde la CI.',
+          highlights: [
+            'Aislamiento entre talleres en la base de datos: claves foráneas compuestas y Row-Level Security de PostgreSQL, de modo que una consulta que olvide filtrar no ve nada.',
+            'Tres actores que no se cruzan (personal, clientes y superadministrador), con API y sesiones separadas y una prueba que recorre el OpenAPI para que ningún endpoint quede fuera.',
+            'Presupuestos versionados que no cambian una vez enviados, ni por SQL: lo garantizan triggers de la base de datos. El cliente los acepta o rechaza desde su portal, con enlace mágico y sin contraseña.',
+            'Historial de estados como fuente de verdad, titularidad de vehículos sin solapes y borradores sin conexión que no se duplican al reenviarlos.',
+            'Despliegue desde la CI a Coolify que comprueba que responde la versión recién construida.',
+          ],
+          stack: ['FastAPI', 'PostgreSQL 17', 'SuperTokens', 'Valkey + SAQ', 'React 19', 'TypeScript', 'Tailwind + shadcn/ui', 'Docker', 'Coolify'],
+          repo: 'Ver código',
+          demo: 'Probar demo',
+          demoSoon: 'Demo próximamente',
+          credentials: {
+            title: 'Cuenta de demostración',
+            user: 'Usuario',
+            pass: 'Contraseña',
+            note: 'Entras como administradora de un taller. Los datos son ficticios y se recargan cada noche. El portal del cliente tiene su propia entrada en /portal/talleres-martinez, con un botón para probarlo sin correo.',
+          },
+          gallery: { label: 'Capturas del proyecto', close: 'Cerrar', prev: 'Anterior', next: 'Siguiente' },
+          shots: [
+            { src: '/axtton/inicio.webp', caption: 'Inicio del taller: órdenes abiertas, paradas, listas y pendientes de cobro', w: 1600, h: 1000 },
+            { src: '/axtton/ordenes.webp', caption: 'Listado de órdenes con estado, responsable y fecha de entrega', w: 1600, h: 1000 },
+            { src: '/axtton/orden.webp', caption: 'Orden en reparación enlazada a una garantía, con deshacer el último cambio', w: 1600, h: 1000 },
+            { src: '/axtton/presupuesto.webp', caption: 'Presupuesto enviado con sus líneas, IVA, PDF, renovar y anular', w: 1600, h: 1000 },
+            { src: '/axtton/portal.webp', caption: 'Portal del cliente: presupuesto para aceptar o rechazar', w: 1600, h: 1000 },
+            { src: '/axtton/portal-movil.webp', caption: 'El mismo portal en el móvil', w: 780, h: 2000 },
+          ],
+        },
+      ],
       more: {
         title: 'Más proyectos en camino',
         text: 'Estoy preparando nuevos proyectos públicos. Mientras tanto, tienes todo mi código abierto en GitHub.',
@@ -233,35 +275,73 @@ export const content: Record<Lang, Content> = {
     projects: {
       title: 'Projects',
       intro: "My client work and personal servers aren't public. Here is what I can show, and more is coming.",
-      tracker: {
-        name: 'Applications Tracker',
-        tagline: 'All your applications, their history and your next step, in one place.',
-        status: 'Complete MVP, in real use',
-        description:
-          'An app to run a job search: it records every application, how it progresses and what to do next. I designed it, built it and deploy it myself, with documentation, tests and CI.',
-        highlights: [
-          'State machine with an append-only history and undo for the latest change.',
-          'User isolation in two layers: a filter on every query and composite foreign keys in the database.',
-          'AI that tailors the CV and cover letter to each offer without inventing experience, with a free local model or your own key.',
-          'Kanban, calendar with Google Calendar export, email reminders and metrics that show how much data they are based on.',
-          'Spanish and English interface, accessible and mobile friendly.',
-        ],
-        stack: ['FastAPI', 'React 19', 'TypeScript', 'PostgreSQL', 'SuperTokens', 'Docker', 'GitHub Actions'],
-        repo: 'View code',
-        demo: 'Try the demo',
-        demoSoon: 'Demo coming soon',
-        credentials: { title: 'Demo account', user: 'User', pass: 'Password', note: 'The data is fictitious and resets every day.' },
-        gallery: { label: 'Project screenshots', close: 'Close', prev: 'Previous', next: 'Next' },
-        shots: [
-          { src: '/tracker/dashboard.webp', caption: 'Dashboard with statuses, weekly submissions and response rate', w: 1600, h: 1000 },
-          { src: '/tracker/tablero.webp', caption: 'Kanban board with drag and drop', w: 1600, h: 1000 },
-          { src: '/tracker/detalle.webp', caption: 'Application detail: history, interviews and reminders', w: 1600, h: 1000 },
-          { src: '/tracker/cv-ia.webp', caption: 'AI-tailored CV, with fit against the job offer', w: 1600, h: 1000 },
-          { src: '/tracker/calendario.webp', caption: 'Calendar of interviews and reminders', w: 1600, h: 1000 },
-          { src: '/tracker/dashboard-oscuro.webp', caption: 'Dashboard in dark mode', w: 1600, h: 1000 },
-          { src: '/tracker/movil.webp', caption: 'Mobile version of the dashboard', w: 780, h: 1688 },
-        ],
-      },
+      items: [
+        {
+          id: 'tracker',
+          name: 'Applications Tracker',
+          tagline: 'All your applications, their history and your next step, in one place.',
+          status: 'Complete MVP, in real use',
+          description:
+            'An app to run a job search: it records every application, how it progresses and what to do next. I designed it, built it and deploy it myself, with documentation, tests and CI.',
+          highlights: [
+            'State machine with an append-only history and undo for the latest change.',
+            'User isolation in two layers: a filter on every query and composite foreign keys in the database.',
+            'AI that tailors the CV and cover letter to each offer without inventing experience, with a free local model or your own key.',
+            'Kanban, calendar with Google Calendar export, email reminders and metrics that show how much data they are based on.',
+            'Spanish and English interface, accessible and mobile friendly.',
+          ],
+          stack: ['FastAPI', 'React 19', 'TypeScript', 'PostgreSQL', 'SuperTokens', 'Docker', 'GitHub Actions'],
+          repo: 'View code',
+          demo: 'Try the demo',
+          demoSoon: 'Demo coming soon',
+          credentials: { title: 'Demo account', user: 'User', pass: 'Password', note: 'The data is fictitious and resets every day.' },
+          video: { src: '/tracker/promo.mp4', poster: '/tracker/promo-poster.jpg', label: 'Promo video (1 minute, in Spanish)' },
+          gallery: { label: 'Project screenshots', close: 'Close', prev: 'Previous', next: 'Next' },
+          shots: [
+            { src: '/tracker/dashboard.webp', caption: 'Dashboard with statuses, weekly submissions and response rate', w: 1600, h: 1000 },
+            { src: '/tracker/tablero.webp', caption: 'Kanban board with drag and drop', w: 1600, h: 1000 },
+            { src: '/tracker/detalle.webp', caption: 'Application detail: history, interviews and reminders', w: 1600, h: 1000 },
+            { src: '/tracker/cv-ia.webp', caption: 'AI-tailored CV, with fit against the job offer', w: 1600, h: 1000 },
+            { src: '/tracker/calendario.webp', caption: 'Calendar of interviews and reminders', w: 1600, h: 1000 },
+            { src: '/tracker/dashboard-oscuro.webp', caption: 'Dashboard in dark mode', w: 1600, h: 1000 },
+            { src: '/tracker/movil.webp', caption: 'Mobile version of the dashboard', w: 780, h: 1688 },
+          ],
+        },
+        {
+          id: 'axtton',
+          name: 'AXTTON CORE',
+          tagline: 'Management for auto repair shops, with a portal so customers can follow their repair without calling.',
+          status: 'In development, fourth phase deployed',
+          description:
+            'A multi-shop application covering the whole flow: booking, check-in, diagnosis, quote, customer approval from their phone, repair and hand-over. I build it in phases, with a product specification, reasoned architecture, tests and deployment from CI.',
+          highlights: [
+            'Isolation between shops enforced in the database: composite foreign keys and PostgreSQL Row-Level Security, so a query that forgets to filter sees nothing.',
+            'Three actors that never cross (staff, customers and superadmin), with separate APIs and sessions, plus a test that walks the OpenAPI so no endpoint is left out.',
+            'Versioned quotes that cannot change once sent, not even through SQL: database triggers guarantee it. Customers accept or reject them in their portal with a magic link and no password.',
+            'Status history as the source of truth, vehicle ownership periods that cannot overlap, and offline drafts that are not duplicated when resent.',
+            'CI deployment to Coolify that checks the freshly built version is the one answering.',
+          ],
+          stack: ['FastAPI', 'PostgreSQL 17', 'SuperTokens', 'Valkey + SAQ', 'React 19', 'TypeScript', 'Tailwind + shadcn/ui', 'Docker', 'Coolify'],
+          repo: 'View code',
+          demo: 'Try the demo',
+          demoSoon: 'Demo coming soon',
+          credentials: {
+            title: 'Demo account',
+            user: 'User',
+            pass: 'Password',
+            note: 'You sign in as a shop administrator. The data is fictitious and reloads every night. The customer portal has its own entry at /portal/talleres-martinez, with a button to try it without email.',
+          },
+          gallery: { label: 'Project screenshots', close: 'Close', prev: 'Previous', next: 'Next' },
+          shots: [
+            { src: '/axtton/inicio.webp', caption: 'Shop home: open, stalled, ready and unpaid orders', w: 1600, h: 1000 },
+            { src: '/axtton/ordenes.webp', caption: 'Order list with status, assignee and due date', w: 1600, h: 1000 },
+            { src: '/axtton/orden.webp', caption: 'Order in repair linked to a warranty, with undo for the last change', w: 1600, h: 1000 },
+            { src: '/axtton/presupuesto.webp', caption: 'Sent quote with its lines, VAT, PDF, renew and void', w: 1600, h: 1000 },
+            { src: '/axtton/portal.webp', caption: 'Customer portal: a quote to accept or reject', w: 1600, h: 1000 },
+            { src: '/axtton/portal-movil.webp', caption: 'The same portal on a phone', w: 780, h: 2000 },
+          ],
+        },
+      ],
       more: {
         title: 'More projects on the way',
         text: "I'm preparing new public projects. In the meantime, all my open code is on GitHub.",
@@ -335,12 +415,24 @@ export const content: Record<Lang, Content> = {
 
 export const links = {
   github: 'https://github.com/iMiguel10',
-  repo: 'https://github.com/iMiguel10/applications-tracker',
   linkedin: 'https://www.linkedin.com/in/miguel-jim%C3%A9nez-cazorla-014807195/',
-  demo: 'https://applications-tracker.imigueldev.duckdns.org/' as string,
-  // Cuenta pública de demostración (datos ficticios, restablecida a diario). La contraseña vacía oculta el bloque.
-  demoUser: 'demo@example.com',
-  demoPass: 'DemoPass' as string,
+}
+
+// Enlaces de cada proyecto. Las cuentas son públicas, de demostración (datos ficticios, restablecidos a diario).
+// Con la contraseña vacía el bloque de la cuenta se oculta; con la demo vacía se muestra "Demo próximamente".
+export const projectLinks: Record<string, { repo: string; demo: string; demoUser: string; demoPass: string }> = {
+  tracker: {
+    repo: 'https://github.com/iMiguel10/applications-tracker',
+    demo: 'https://applications-tracker.imigueldev.duckdns.org/',
+    demoUser: 'demo@example.com',
+    demoPass: 'DemoPass',
+  },
+  axtton: {
+    repo: 'https://github.com/iMiguel10/axtton-core',
+    demo: 'https://axtton.imigueldev.duckdns.org/',
+    demoUser: 'laura@demo.example.com',
+    demoPass: 'demo-axtton-2026',
+  },
 }
 
 export const emailParts = ['imiguel10', 'hotmail.es'] as const

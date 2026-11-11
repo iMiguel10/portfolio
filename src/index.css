@@ -435,6 +435,28 @@ ol {
   border-radius: 32px;
   padding: clamp(20px, 4vw, 48px);
 }
+.projects-list {
+  display: grid;
+  gap: clamp(24px, 4vw, 40px);
+}
+.project-video {
+  grid-column: 1 / -1;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.project-video video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--bg);
+  display: block;
+}
+.project-video figcaption {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
 .project-info {
   display: grid;
   gap: 18px;
