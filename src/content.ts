@@ -65,7 +65,7 @@ export interface Content {
     languages: string
   }
   contact: { title: string; text: string; email: string; linkedin: string; github: string }
-  footer: { built: string; rights: string }
+  footer: { built: string; rights: string; privacy: string }
 }
 
 export const content: Record<Lang, Content> = {
@@ -238,7 +238,12 @@ export const content: Record<Lang, Content> = {
       linkedin: 'LinkedIn',
       github: 'GitHub',
     },
-    footer: { built: 'Hecho con React y Vite, desplegado en mi propio servidor.', rights: 'Miguel Jiménez Cazorla' },
+    footer: {
+      built: 'Hecho con React y Vite, desplegado en mi propio servidor.',
+      rights: 'Miguel Jiménez Cazorla',
+      privacy:
+        'Privacidad: esta web usa Umami, una analítica autoalojada que no utiliza cookies ni almacena datos en tu dispositivo, no guarda tu IP ni identifica a visitantes concretos. Solo se registran estadísticas agregadas (páginas vistas, país, dispositivo y navegador). Si me escribes, usaré tu email únicamente para responderte.',
+    },
   },
   en: {
     nav: {
@@ -409,7 +414,12 @@ export const content: Record<Lang, Content> = {
       linkedin: 'LinkedIn',
       github: 'GitHub',
     },
-    footer: { built: 'Built with React and Vite, deployed on my own server.', rights: 'Miguel Jiménez Cazorla' },
+    footer: {
+      built: 'Built with React and Vite, deployed on my own server.',
+      rights: 'Miguel Jiménez Cazorla',
+      privacy:
+        'Privacy: this site uses Umami, a self-hosted analytics tool that sets no cookies and stores nothing on your device, does not keep your IP address and does not identify individual visitors. Only aggregate statistics are recorded (page views, country, device and browser). If you email me, I will use your address only to reply.',
+    },
   },
 }
 

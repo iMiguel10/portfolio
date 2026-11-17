@@ -368,6 +368,7 @@ export default function App() {
             © {new Date().getFullYear()} {t.footer.rights}
           </span>
           <span>{t.footer.built}</span>
+          <p className="footer-privacy">{t.footer.privacy}</p>
         </div>
       </footer>
     </>
